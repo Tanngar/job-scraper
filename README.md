@@ -1,15 +1,17 @@
 Frontend:
--TypeScript
--Eslint
--Vite
--React
--Tailwind
+
+- TypeScript
+- Eslint
+- Vite
+- React
+- Tailwind
 
 Backend:
--TypeScript
--Eslint
--Express
--Prisma
+
+- TypeScript
+- Eslint
+- Express
+- Prisma
 
 To init database run:
 
