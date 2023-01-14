@@ -1,11 +1,42 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Posting {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  companyName     String   @db.VarChar(255)
+  url String
+  position String
+  description   String
+}
+
+enum Type {
+  Word 
+  Phrase
+}
+
+model Tag {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  text String
+  type Type
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name String
+  color String
+  posts Tag[]
 }

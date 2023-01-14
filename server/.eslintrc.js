@@ -19,5 +19,10 @@ module.exports = {
     project: './server/tsconfig.json',
   },
   plugins: ['@typescript-eslint', 'prettier'],
-  rules: {},
+  rules: {
+    'import/no-cycle': 'off',
+    radix: 'off',
+    'no-plusplus': { allowForLoopAfterthoughts: true },
+    'no-await-in-loop': 'off',
+  },
 };
