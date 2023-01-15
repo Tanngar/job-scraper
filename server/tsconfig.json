@@ -3,7 +3,7 @@
     "target": "ES2017",
     "downlevelIteration": true,
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "public",
     "strict": true,
     "lib": ["esnext", "dom"],
     "esModuleInterop": true,
