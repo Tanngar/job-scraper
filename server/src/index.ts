@@ -21,3 +21,5 @@ app.use('/api/scrapers', scrapersRouter);
 app.listen(PORT, () => {
   console.log(`Listening on the port: ${PORT}`);
 });
+
+module.exports = app;
