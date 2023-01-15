@@ -14,8 +14,11 @@ app.use('/api/postings', postingsRouter);
 app.use('/api/tags', tagsRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/scrapers', scrapersRouter);
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
 app.listen(PORT, () => {
-    console.log(`Listening on the port: ${PORT}`);
+  console.log(`Listening on the port: ${PORT}`);
 });
 module.exports = app;
 //# sourceMappingURL=index.js.map
