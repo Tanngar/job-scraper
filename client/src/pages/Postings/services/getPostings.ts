@@ -1,4 +1,4 @@
 export const getPostings = async () => {
-  const res = await fetch('http://localhost:3001/api/postings');
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/postings`);
   return res.json();
 };

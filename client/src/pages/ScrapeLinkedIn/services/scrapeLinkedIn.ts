@@ -1,5 +1,5 @@
 export const scrapeLinkedIn = async (position: string, location: string) => {
-  return fetch('http://localhost:3001/api/scrapers/linkedin', {
+  return fetch(`${import.meta.env.VITE_API_URL}/scrapers/linkedin`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',

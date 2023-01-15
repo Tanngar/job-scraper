@@ -1,4 +1,4 @@
 export const getTags = async () => {
-  const res = await fetch(`http://localhost:3001/api/tags/`);
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/tags/`);
   return res.json();
 };

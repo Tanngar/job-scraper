@@ -1,4 +1,4 @@
 export const getCategories = async () => {
-  const res = await fetch(`http://localhost:3001/api/categories/`);
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/categories/`);
   return res.json();
 };

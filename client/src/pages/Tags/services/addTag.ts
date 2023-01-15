@@ -1,5 +1,5 @@
 export const addTag = async (text: string, categoryId: string) => {
-  await fetch('http://localhost:3001/api/tags/', {
+  await fetch(`${import.meta.env.VITE_API_URL}/tags/`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',

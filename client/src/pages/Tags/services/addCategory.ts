@@ -1,5 +1,5 @@
 export const addCategory = async (category: string, color: string) => {
-  await fetch('http://localhost:3001/api/categories/', {
+  await fetch(`${import.meta.env.VITE_API_URL}/categories/`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
