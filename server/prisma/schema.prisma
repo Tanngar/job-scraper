@@ -12,9 +12,13 @@ model Posting {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   companyName     String   @db.VarChar(255)
-  url String
-  position String
   description   String
+  analyzedDescription   String
+  location String
+  numOfApplicants String
+  position String
+  postedAt String
+  url String
 }
 
 enum Type {

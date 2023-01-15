@@ -7,6 +7,15 @@ module.exports = {
       body: ['Inter', 'sans-serif'],
     },
     extend: {
+      animation: {
+        slideIn: 'slideIn 1s ease-in-out',
+      },
+      keyframes: {
+        slideIn: {
+          '0%': { transform: 'translate(500px)' },
+          '100%': { transform: 'translate(0px)' },
+        },
+      },
       colors: {
         primary: {
           500: '#44CF6C',

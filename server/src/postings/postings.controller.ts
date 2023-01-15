@@ -32,7 +32,9 @@ export const createPosting = async (req: Request, res: Response) => {
     res.status(400);
   }
 
-  const newPosting = await prisma.posting.create({ data: posting });
+  const newPosting = await prisma.posting.create({
+    data: { ...posting, analyzedDescription: '' },
+  });
 
   res.status(200).json(newPosting);
 };
@@ -64,34 +66,4 @@ export const deletePosting = async (req: Request, res: Response) => {
   });
 
   res.status(200);
-};
-
-export const scanForTags = async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id);
-
-  const posting = await prisma.posting.findUnique({
-    where: {
-      id,
-    },
-  });
-
-  if (!posting) {
-    res.status(400);
-    throw new Error(`Posting with ID:${id} does not exist. `);
-  }
-
-  const tags = await prisma.tag.findMany();
-
-  const { description } = posting;
-
-  if (!description) return;
-
-  const matches = tags.filter((tag) => {
-    const pattern = `\\b${tag.text}\\b`;
-    const reg = new RegExp(pattern, 'gi');
-
-    return description.match(reg);
-  });
-
-  res.status(200).json(matches);
 };

@@ -1,32 +1,29 @@
 import { useEffect, useState, useMemo } from 'react';
 import { getTags } from '../services/getTags';
 
-type Tag = {
-  id: string;
+export type Tag = {
   text: string;
-  colour: string;
   category: {
     id: string;
-    colour: string;
+    color: string;
   };
 };
 
+export interface TagWithId extends Tag {
+  id: string;
+}
+
 export default function useTags() {
-  const [tags, setTags] = useState<Tag[]>([]);
+  const [tags, setTags] = useState<TagWithId[]>([]);
+
+  async function fetchTags() {
+    const data = await getTags();
+    setTags(data);
+  }
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getTags();
-      setTags(data);
-    };
-
-    fetchData();
+    fetchTags();
   }, []);
 
-  // const handleDeletePosting = (id: string) => {
-  //   const updatedPostings = postings.filter((posting) => posting.id !== id);
-  //   setPostings(updatedPostings);
-  // };
-
-  return { tags };
+  return { tags, fetchTags };
 }

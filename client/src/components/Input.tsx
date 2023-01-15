@@ -1,6 +1,5 @@
 import clsx from 'clsx';
-import React, { HTMLProps, useEffect, useRef } from 'react';
-import Typography from './Typography/Typography';
+import { useEffect, useRef } from 'react';
 
 type Props = {
   label?: string;

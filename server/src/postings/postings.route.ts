@@ -5,7 +5,6 @@ import {
   createPosting,
   editPosting,
   deletePosting,
-  scanForTags,
 } from './postings.controller';
 
 const router = express.Router();
@@ -28,10 +27,6 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   deletePosting(req, res);
-});
-
-router.get('/:id/scan-for-tags', (req, res) => {
-  scanForTags(req, res);
 });
 
 export default router;

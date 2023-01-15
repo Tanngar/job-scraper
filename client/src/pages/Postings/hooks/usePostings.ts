@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { PostingWithId } from '../components/Posting';
+import { PostingWithId } from '../../../components/Posting';
 import { getPostings } from '../services/getPostings';
 
 export default function usePostings() {
   const { id } = useParams();
-  const [activePostingId, setActivePostingId] = useState<number | null>(null);
+  const [activePostingId, setActivePostingId] = useState<number>(0);
   const [postings, setPostings] = useState<PostingWithId[]>([]);
 
-  useEffect(() => {
-    fetchData();
+  async function fetchPostings() {
+    const data = await getPostings();
+    setPostings(data);
+    if (!data) return;
+    setActivePostingId(data[0].id);
+  }
 
-    async function fetchData() {
-      const data = await getPostings();
-      setPostings(data);
-      setActivePostingId(data[0].id);
-    }
+  useEffect(() => {
+    fetchPostings();
   }, []);
 
   useEffect(() => {
@@ -23,10 +24,9 @@ export default function usePostings() {
     setActivePostingId(parseInt(id));
   }, [id]);
 
-  // const handleDeletePosting = (id: string) => {
-  //   const updatedPostings = postings.filter((posting) => posting.id !== id);
-  //   setPostings(updatedPostings);
-  // };
+  async function updatePostings(postings: PostingWithId[]) {
+    await setPostings(postings);
+  }
 
-  return { postings, activePostingId };
+  return { postings, activePostingId, fetchPostings };
 }

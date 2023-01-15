@@ -9,44 +9,37 @@ export const getTags = async (req: Request, res: Response) => {
       },
     ],
     include: {
-      category: true, // Return all fields
+      category: true,
     },
   });
 
   res.status(200).json(tags);
 };
 
-// export const getTagsByCategory = async (req: Request, res: Response) => {
-//   const category = req.params.category as Category;
+export const getTagsByCategoryId = async (req: Request, res: Response) => {
+  const { categoryId } = req.body;
 
-//   if (!(category in Category)) {
-//     res.status(500);
-//     throw new Error('Invalid Tag category.');
-//   }
+  const tags = await prisma.tag.findMany({
+    where: {
+      categoryId,
+    },
+    orderBy: [
+      {
+        createdAt: 'desc',
+      },
+    ],
+  });
 
-//   const tags = await prisma.tag.findMany({
-//     where: {
-//       category,
-//     },
-//     orderBy: [
-//       {
-//         createdAt: 'desc',
-//       },
-//     ],
-//   });
-
-//   res.status(200).json(tags);
-// };
+  res.status(200).json(tags);
+};
 
 export const createTag = async (req: Request, res: Response) => {
-  const tag = req.body;
+  const { text, type } = req.body;
+  const cateogryId = parseInt(req.body.categoryId);
 
-  if (!tag) {
-    res.status(500);
-    throw new Error('Invalid tag.');
-  }
-
-  await prisma.tag.create({ data: tag });
+  const tag = await prisma.tag.create({
+    data: { text, type, category: { connect: { id: cateogryId } } },
+  });
 
   res.status(200).json(tag);
 };

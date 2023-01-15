@@ -1,23 +1,42 @@
 import clsx from 'clsx';
 import { Children, ReactNode, useState } from 'react';
-import Typography from '../../../components/Typography/Typography';
+import Typography from '../../../components/Typography';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
-import Button from '../../../components/Button/Button';
+import Button from '../../../components/Button';
 import { CategoryColor } from '../../../utils/categoryColors';
 import Input from '../../../components/Input';
 import HorizontalDivider from '../../../components/HorizontalDivider';
 import ColorSwatch from './ColorSwatch';
+import Form from '../../../components/Form';
+import { addTag } from '../services/addTag';
+import { Category } from '../hooks/useCategories';
+import { Tag } from '../hooks/useTags';
 
 type Props = {
+  category: Category;
   children: ReactNode;
   label: string;
   color: CategoryColor;
+  fetchTags: () => void;
 };
 
-const Accordion = ({ children, label, color }: Props) => {
+const Accordion = (props: Props) => {
+  const { category, children, fetchTags } = props;
+  const { id, name, color } = category;
+
+  const [tag, setTag] = useState('');
+
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const iconStyles = 'text-3xl text-gray-300';
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    await addTag(tag, id);
+    setTag('');
+    fetchTags();
+  }
 
   return (
     <div>
@@ -29,7 +48,7 @@ const Accordion = ({ children, label, color }: Props) => {
       >
         <div className="flex w-full items-center gap-3 capitalize">
           <ColorSwatch color={color} />
-          <Typography variant="subtitle">{label}</Typography>
+          <Typography variant="subtitle">{name}</Typography>
         </div>
         {isCollapsed ? (
           <IoMdArrowDropdown className={iconStyles} />
@@ -39,10 +58,15 @@ const Accordion = ({ children, label, color }: Props) => {
       </div>
       {!isCollapsed && (
         <div className="flex flex-col gap-4 border border-t-0 border-gray-600 bg-temp-800 p-4">
-          <div className="flex items-end gap-4">
-            <Input name="tag" label="Tag" />
-            <Button>Add tag</Button>
-          </div>
+          <Form onSubmit={(e) => handleSubmit(e)}>
+            <Input
+              name="tag"
+              label="Tag"
+              value={tag}
+              onChange={(e) => setTag(e.target.value)}
+            />
+            <Button type="submit">Add tag</Button>
+          </Form>
           <HorizontalDivider />
           {!Children.count(children) ? (
             <Typography variant="caption">

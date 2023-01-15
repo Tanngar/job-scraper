@@ -1,10 +1,17 @@
 import express from 'express';
-import { scrapeLinkedIn } from './scrapers.controller';
+import {
+  scrapeLinkedInSearch,
+  scrapeSpecificLinkedInUrl,
+} from './scrapers.controller';
 
 const router = express.Router();
 
 router.post('/linkedin', async (req, res) => {
-  scrapeLinkedIn(req, res);
+  scrapeLinkedInSearch(req, res);
+});
+
+router.post('/linkedin/url', async (req, res) => {
+  scrapeSpecificLinkedInUrl(req, res);
 });
 
 export default router;

@@ -1,6 +1,6 @@
-import { Posting } from '../../Postings/components/Posting';
+import { TPosting } from '../components/Posting';
 
-export const addPosting = async (posting: Posting) => {
+export const addPosting = async (posting: TPosting) => {
   return fetch('http://localhost:3001/api/postings', {
     method: 'POST',
     headers: {

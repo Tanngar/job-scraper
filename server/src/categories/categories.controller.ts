@@ -26,13 +26,15 @@ export const getCategory = async (req: Request, res: Response) => {
 };
 
 export const createCategory = async (req: Request, res: Response) => {
-  const category = req.body;
+  const { category, color } = req.body;
 
   if (!category) {
     res.status(400);
   }
 
-  const newCategory = await prisma.category.create({ data: category });
+  const newCategory = await prisma.category.create({
+    data: { name: category, color },
+  });
 
   res.status(200).json(newCategory);
 };

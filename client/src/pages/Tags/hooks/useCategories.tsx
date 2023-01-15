@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { CategoryColor } from '../../../utils/categoryColors';
 import { getCategories } from '../services/getCategories';
 
-type Category = {
+export type Category = {
   id: string;
   name: string;
   color: CategoryColor;
@@ -11,14 +11,14 @@ type Category = {
 export default function useCategories() {
   const [categories, setCategories] = useState<Category[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getCategories();
-      setCategories(data);
-    };
+  async function fetchCategories() {
+    const data = await getCategories();
+    setCategories(data);
+  }
 
-    fetchData();
+  useEffect(() => {
+    fetchCategories();
   }, []);
 
-  return { categories };
+  return { categories, fetchCategories };
 }

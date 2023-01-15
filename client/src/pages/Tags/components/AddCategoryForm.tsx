@@ -1,13 +1,21 @@
-import Button from '../../../components/Button/Button';
+import Button from '../../../components/Button';
 import Input from '../../../components/Input';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { categoryColors } from '../../../utils/categoryColors';
 import ColorSwatch from './ColorSwatch';
+import Form from '../../../components/Form';
+import { addCategory } from '../services/addCategory';
 
-const AddCategoryForm = () => {
+type Props = {
+  fetchCategories: () => void;
+};
+
+const AddCategoryForm = (props: Props) => {
+  const { fetchCategories } = props;
+
   const firstColor = categoryColors[0];
-
   const [selectedColor, setSelectedColor] = useState<string>(firstColor);
+  const [category, setCategory] = useState('');
 
   function handleColorSwatchClick(e: React.MouseEvent<HTMLDivElement>) {
     const clickedColor = e.currentTarget.dataset.color;
@@ -15,12 +23,15 @@ const AddCategoryForm = () => {
     setSelectedColor(clickedColor);
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    await addCategory(category, selectedColor);
+    fetchCategories();
   }
 
   return (
-    <form className="flex flex-col gap-4 bg-temp-800">
+    <Form onSubmit={(e) => handleSubmit(e)}>
       <div className="flex gap-2">
         {categoryColors.map((color) => (
           <ColorSwatch
@@ -31,9 +42,13 @@ const AddCategoryForm = () => {
           />
         ))}
       </div>
-      <Input name="category" label="Category" />
+      <Input
+        name="category"
+        label="Category"
+        onChange={(e) => setCategory(e.target.value)}
+      />
       <Button type="submit">Add category</Button>
-    </form>
+    </Form>
   );
 };
 

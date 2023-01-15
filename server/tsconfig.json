@@ -6,6 +6,7 @@
     "outDir": "dist",
     "strict": true,
     "lib": ["esnext", "dom"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "node"
   }
 }

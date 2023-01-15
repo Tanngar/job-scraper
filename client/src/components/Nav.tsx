@@ -37,7 +37,7 @@ const Nav = () => {
             to="/postings"
           >
             <AiOutlineFileText className={iconStyles} />
-            OVERVIEW
+            POSTINGS
           </NavLink>
         </li>
         <li>

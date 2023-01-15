@@ -1,10 +1,19 @@
 import express from 'express';
-import { createTag, deleteTag, getTags } from './tags.controller';
+import {
+  createTag,
+  deleteTag,
+  getTags,
+  getTagsByCategoryId,
+} from './tags.controller';
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
   getTags(req, res);
+});
+
+router.get('/:categoryId', async (req, res) => {
+  getTagsByCategoryId(req, res);
 });
 
 router.post('/', async (req, res) => {
