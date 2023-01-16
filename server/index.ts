@@ -1,10 +1,10 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
 import cors from 'cors';
-import postingsRouter from './postings/postings.route';
-import tagsRouter from './tags/tags.route';
-import categoriesRouter from './categories/categories.route';
-import scrapersRouter from './scrapers/scrapers.route';
+import postingsRouter from './src/postings/postings.route';
+import tagsRouter from './src/tags/tags.route';
+import categoriesRouter from './src/categories/categories.route';
+import scrapersRouter from './src/scrapers/scrapers.route';
 
 export const prisma = new PrismaClient();
 
@@ -25,5 +25,3 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Listening on the port: ${PORT}`);
 });
-
-module.exports = app;

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { prisma } from '..';
+import { prisma } from '../../index';
 
 export const getCategories = async (req: Request, res: Response) => {
   const postings = await prisma.category.findMany({

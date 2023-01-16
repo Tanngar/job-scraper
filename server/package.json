@@ -1,12 +1,11 @@
 {
-  "type": "module",
   "name": "job-analyzer-server",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node public/index.js",
+    "start": "node build/index.js",
     "dev": "ts-node-dev --respawn src/index.ts"
   },
   "keywords": [],

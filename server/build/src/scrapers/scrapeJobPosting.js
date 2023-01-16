@@ -1,4 +1,7 @@
-export function scrapeJobPosting() {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.scrapeJobPosting = void 0;
+function scrapeJobPosting() {
     var _a, _b, _c, _d, _e, _f, _g;
     const position = ((_a = document.querySelector('.top-card-layout__title')) === null || _a === void 0 ? void 0 : _a.textContent) || '';
     const url = ((_b = document.querySelector('.top-card-layout__entity-info [data-tracking-will-navigate]')) === null || _b === void 0 ? void 0 : _b.href) || '';
@@ -17,4 +20,5 @@ export function scrapeJobPosting() {
         description,
     };
 }
+exports.scrapeJobPosting = scrapeJobPosting;
 //# sourceMappingURL=scrapeJobPosting.js.map

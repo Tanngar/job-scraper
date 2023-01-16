@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "downlevelIteration": true,
+    "target": "ES6",
+    "module": "CommonJS",
     "sourceMap": true,
-    "outDir": "./public",
+    "downlevelIteration": true,
+    "outDir": "./build",
     "strict": true,
     "lib": ["esnext", "dom"],
     "esModuleInterop": true,
